@@ -1,5 +1,6 @@
 package com.itzeng.ssm.controller;
 
+import com.github.pagehelper.PageInfo;
 import com.itzeng.ssm.domain.Orders;
 import com.itzeng.ssm.service.IOrderService;
 
@@ -27,11 +28,21 @@ public class OrderController {
 
     @RequestMapping("/findAll.do")
     public ModelAndView findAllByPage(@RequestParam(name = "page", required = true, defaultValue = "1") Integer page,
-                                      @RequestParam(name = "pageSize", required = true, defaultValue = "10") Integer pageSize) throws Exception{
+                                      @RequestParam(name = "pageSize", required = true, defaultValue = "4") Integer pageSize) throws Exception{
         ModelAndView view = new ModelAndView();
         List<Orders> ordersList = orderService.findAllByPage(page, pageSize);
-        view.addObject("ordersList",ordersList);
-        view.setViewName("orders-list");
+        PageInfo<Orders> pageInfo = new PageInfo<>(ordersList);
+        view.addObject("pageInfo",pageInfo);
+        view.setViewName("orders-page-list");
+        return view;
+    }
+
+    @RequestMapping("/findById.do")
+    public ModelAndView findById(@RequestParam(name = "id",required = true) String orderId) throws Exception {
+        ModelAndView view = new ModelAndView();
+        Orders order = orderService.findById(orderId);
+        view.setViewName("orders-show");
+        view.addObject("orders",order);
         return view;
     }
 }

@@ -38,7 +38,7 @@
                     <property name="properties">
                         <!--使用下面的方式配置参数，一行配置一个 -->
                         <value>
-                            params=value1
+                            helperDialect=oracle
                         </value>
                     </property>
                 </bean>

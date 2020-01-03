@@ -1,5 +1,6 @@
 package com.itzeng.ssm.domain;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 /**
@@ -81,7 +82,8 @@ public class Product {
     }
 
     public String getDepartureTimeStr() {
-        return departureTimeStr;
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+        return sdf.format(departureTime);
     }
 
     public void setDepartureTimeStr(String departureTimeStr) {

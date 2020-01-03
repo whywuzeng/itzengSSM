@@ -14,4 +14,6 @@ import java.util.List;
 
 public interface IOrderService {
     List<Orders> findAllByPage(int page, int pageSize) throws Exception;
+
+    Orders findById(String orderId) throws Exception;
 }

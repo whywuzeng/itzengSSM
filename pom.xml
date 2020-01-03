@@ -179,6 +179,18 @@
             <artifactId>jsr250-api</artifactId>
             <version>1.0</version>
         </dependency>
+<!--        安全-->
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-web</artifactId>
+            <version>5.0.1.RELEASE</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-config</artifactId>
+            <version>5.0.1.RELEASE</version>
+        </dependency>
+
     </dependencies>
     <build>
         <pluginManagement>

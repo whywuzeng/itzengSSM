@@ -1,5 +1,6 @@
 package com.itzeng.ssm.service.impl;
 
+import com.github.pagehelper.PageHelper;
 import com.itzeng.ssm.dao.IOrderDao;
 import com.itzeng.ssm.domain.Orders;
 import com.itzeng.ssm.service.IOrderService;
@@ -24,6 +25,12 @@ public class OrderServiceImpl implements IOrderService {
 
     @Override
     public List<Orders> findAllByPage(int page, int pageSize) throws Exception {
+        PageHelper.startPage(page,pageSize);
         return orderDao.findAllByPage();
+    }
+
+    @Override
+    public Orders findById(String orderId) throws Exception {
+        return orderDao.findById(orderId);
     }
 }

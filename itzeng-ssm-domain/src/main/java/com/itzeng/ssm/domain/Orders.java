@@ -14,14 +14,14 @@ import java.util.List;
 
 public class Orders {
     private String id;
-    private String orderNum;
+    private String orderNum;//出游人数
     private Date orderTime;
     private String orderTimeStr;
     private Integer peoplecount;
-    private String orderDesc;
-    private Integer payType;
+    private String orderDesc; //其他信息
+    private Integer payType; //支付方式
     private String payTypeStr;
-    private Integer orderStatus;
+    private Integer orderStatus;//支付状态
     private String orderStatusStr;
     private Product product;
     private Member member;

@@ -2,6 +2,7 @@ package com.itzeng.ssm.dao;
 
 import com.itzeng.ssm.domain.Orders;
 
+import org.apache.ibatis.annotations.Many;
 import org.apache.ibatis.annotations.One;
 import org.apache.ibatis.annotations.Result;
 import org.apache.ibatis.annotations.Results;
@@ -30,4 +31,18 @@ public interface IOrderDao {
             @Result(column = "productId",property = "product",one =@One(select = "com.itzeng.ssm.dao.IProductDao.findById"))
     })
     List<Orders> findAllByPage() throws Exception;
+
+    //查看orders 详情
+    @Select("Select * from orders where id=#{orderId}")
+    @Results({
+            @Result(id = true,column = "id",property = "id"),
+            @Result(column = "orderNum",property = "orderNum"),
+            @Result(column = "orderTime",property = "orderTime"),
+            @Result(column = "peoplecount",property = "peoplecount"),
+            @Result(column = "productId",property = "product",one = @One(select = "com.itzeng.ssm.dao.IProductDao.findById")),
+            @Result(column = "id",property = "travellers",many = @Many(select ="com.itzeng.ssm.dao.ITravellerDao.findByOrderId" )),
+            @Result(column = "memberId",property = "member",one = @One(select = "com.itzeng.ssm.dao.IMemberDao.findByMemberId")),
+            @Result(column = "payType",property = "payType"),
+    })
+    Orders findById(String orderId);
 }
