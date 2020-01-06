@@ -13,5 +13,7 @@
     <orderEntry type="module" module-name="itzengssmdao" exported="" />
     <orderEntry type="library" name="Maven: org.springframework:spring-beans:5.0.2.RELEASE" level="project" />
     <orderEntry type="library" name="Maven: com.github.pagehelper:pagehelper:5.1.11" level="project" />
+    <orderEntry type="library" name="Maven: org.springframework.security:spring-security-core:5.0.1.RELEASE" level="project" />
+    <orderEntry type="library" name="Maven: org.springframework:spring-tx:5.0.2.RELEASE" level="project" />
   </component>
 </module>
