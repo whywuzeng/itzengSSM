@@ -1,9 +1,11 @@
 package com.itzeng.ssm.dao;
 
+import com.itzeng.ssm.domain.Role;
 import com.itzeng.ssm.domain.UserInfo;
 
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Many;
+import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Result;
 import org.apache.ibatis.annotations.Results;
 import org.apache.ibatis.annotations.Select;
@@ -39,7 +41,7 @@ public interface IUserDao {
             @Result(column = "phoneNum",property = "phoneNum"),
             @Result(column = "id",property = "roles",javaType = List.class,many = @Many(select = "com.itzeng.ssm.dao.IRoleDao.findByUserInfoId")),
     })
-    UserInfo findByUserId(Long userId);
+    UserInfo findByUserId(String userId);
 
     @Select("select * from users")
     @Results({
@@ -54,4 +56,10 @@ public interface IUserDao {
 
     @Insert("insert into users(email, username, password, phonenum, status) values(#{email}, #{username}, #{password}, #{phoneNum}, #{status})")
     void save(UserInfo info) throws Exception;
+
+    @Select("select * from role where role.id not in(select roleid from users_role where usersId = #{id})")
+    List<Role> findUserByIdAndAllRole(String id);
+
+    @Insert("insert into users_role(usersId,roleId)values(#{userId},#{roleId})")
+    void addRoleToUser(@Param("userId") String userId,@Param("roleId") String roleId);
 }

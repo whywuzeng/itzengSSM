@@ -42,7 +42,7 @@ public class UserServiceImpl implements IUserService {
         List<Role> roles = userInfo.getRoles();
         List<SimpleGrantedAuthority> authority = getAuthority(roles);
 
-        User user = new User(userInfo.getUsername(), "noop" + userInfo.getPassword(), userInfo.getStatus() == 0 ? true : false, true, true, true, authority);
+        User user = new User(userInfo.getUsername(),userInfo.getPassword(), userInfo.getStatus() == 0 ? false : true, true, true, true, authority);
 
         return user;
     }
@@ -59,7 +59,7 @@ public class UserServiceImpl implements IUserService {
     }
 
     @Override
-    public UserInfo findById(Long id) {
+    public UserInfo findById(String id) {
         return userDao.findByUserId(id);
     }
 
@@ -73,5 +73,18 @@ public class UserServiceImpl implements IUserService {
     public void save(UserInfo info) throws Exception {
         info.setPassword(passwordEncoder.encode(info.getPassword()));
         userDao.save(info);
+    }
+
+    @Override
+    public List<Role> findUserByIdAndAllRole(String id) {
+
+        return userDao.findUserByIdAndAllRole(id);
+    }
+
+    @Override
+    public void addRoleToUser(String userId, String[] ids) {
+        for (String id : ids) {
+            userDao.addRoleToUser(userId,id);
+        }
     }
 }

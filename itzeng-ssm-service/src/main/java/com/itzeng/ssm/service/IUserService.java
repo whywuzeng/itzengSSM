@@ -1,5 +1,6 @@
 package com.itzeng.ssm.service;
 
+import com.itzeng.ssm.domain.Role;
 import com.itzeng.ssm.domain.UserInfo;
 
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -16,9 +17,13 @@ import java.util.List;
 
 public interface IUserService extends UserDetailsService {
 
-    UserInfo findById(Long id);
+    UserInfo findById(String id);
 
     List<UserInfo> findByAllData() throws Exception;
 
     void save(UserInfo info) throws Exception;
+
+    List<Role> findUserByIdAndAllRole(String id);
+
+    void addRoleToUser(String userId, String[] ids);
 }

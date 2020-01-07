@@ -1,6 +1,7 @@
 package com.itzeng.ssm.service.impl;
 
 import com.itzeng.ssm.dao.IRoleDao;
+import com.itzeng.ssm.domain.Permission;
 import com.itzeng.ssm.domain.Role;
 import com.itzeng.ssm.service.IRoleService;
 
@@ -30,5 +31,22 @@ public class RoleServiceImpl implements IRoleService {
     @Override
     public void save(Role role) {
         roleDao.save(role);
+    }
+
+    @Override
+    public Role findById(String id) {
+        return roleDao.findById(id);
+    }
+
+    @Override
+    public List<Permission> findRoleByIdAndAllPermission(String id) {
+        return roleDao.findRoleByIdAndAllPermission(id);
+    }
+
+    @Override
+    public void addPermissionToRole(String roleId, String[] ids) {
+        for (String id : ids) {
+            roleDao.addPermissionToRole(roleId,id);
+        }
     }
 }

@@ -15,6 +15,8 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
+import javax.annotation.security.RolesAllowed;
+
 /**
  * Created by Administrator on 2019/12/31.
  * <p>
@@ -37,7 +39,9 @@ public class ProductController {
     @Autowired
     private IProductService productService;
 
+    //只能admin可以看
     @RequestMapping("/findAll.do")
+    @RolesAllowed("ADMIN")
     public ModelAndView findAll(){
         ModelAndView view = new ModelAndView();
         List<Product> products = productService.findAll();
